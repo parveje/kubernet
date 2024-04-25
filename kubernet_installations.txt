@@ -25,7 +25,7 @@ ubuntu 22.04
 ========================================
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
 sudo add-apt-repository "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu jammy stable"
-
+#nano /etc/apt/sources.list.d/docker.list
 sudo apt update
 sudo apt install docker-ce -y
 systemctl start docker
@@ -54,7 +54,7 @@ EOF
 
 systemctl enable docker
 systemctl daemon-reload
-
+systemctl start docker
 
 #Installing Kubernetes
 #curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add
@@ -67,6 +67,6 @@ curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.30/deb/Release.key | sudo gpg --
 cat <<EOF | sudo tee /etc/apt/sources.list.d/kubernetes.list
 deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.30/deb/ /
 EOF
-
-kubeadm version
+sudo apt update
+sudo apt-get install kubeadm kubelet kubectl -y
 kubeadm version
